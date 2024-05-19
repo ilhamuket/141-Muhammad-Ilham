@@ -20,23 +20,54 @@ class HomeController extends Controller
 
      public function index(Request $request): View
     {
-        $articles = TmDataArticle::with('user', 'category')->latest()->paginate(5);
+        
+        $categoryId = $request->input('category');
+        $userId = $request->input('user');
+
+        
+        $query = TmDataArticle::with('user', 'category')->latest();
+
+        
+        if ($categoryId) {
+            $query->whereHas('category', function ($query) use ($categoryId) {
+                $query->where('id', $categoryId);
+            });
+        }
+
+        
+        if ($userId) {
+            $query->where('user_id', $userId);
+        }
+
+        
+        $articles = $query->paginate(5);
+
+        
         $authors = User::withCount('articles')->orderBy('articles_count', 'desc')->take(5)->get();
         $categories = TmRefCategory::all();
-
-        return view('home.index', compact('articles', 'authors', 'categories'));
+        $articlesTrend = TmDataArticle::with('user', 'category')
+        ->withCount('comments')
+        ->orderByDesc('comments_count') 
+        ->limit(3)
+        ->get();
+        
+        return view('home.index', compact('articles','articlesTrend', 'authors', 'categories'));
     }
 
 
     public function show(TmDataArticle $article)
     {
-        $article->load('category', 'user');
+        $article->load('category', 'user', 'comments');
         $authors = User::withCount('articles')->orderBy('articles_count', 'desc')->take(5)->get();
         $categories = TmRefCategory::all();
-        $articles = TmDataArticle::with('user', 'category')->latest()->limit(3)->get();
+        $articlesTrend = TmDataArticle::with('user', 'category')
+        ->withCount('comments')
+        ->orderByDesc('comments_count') 
+        ->limit(3)
+        ->get();
 
     
-        return view('home.show', compact('article','articles', 'authors', 'categories'));
+        return view('home.show', compact('article','articlesTrend', 'authors', 'categories'));
     }
     
 

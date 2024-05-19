@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentsController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -20,6 +21,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
+    Route::prefix('comments')->group(function () {
+        Route::post('/articles/{article}/comments', [CommentsController::class, 'store'])->name('comments.store');
+        Route::delete('/comments/{comment}', [CommentsController::class, 'destroy'])->name('comments.destroy');
     });
 
     Route::prefix('article')->middleware('admin')->group(function () {

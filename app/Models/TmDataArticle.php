@@ -31,6 +31,6 @@ class TmDataArticle extends Model
 
     public function comments()
     {
-        return $this->hasMany(CommentArticle::class);
+        return $this->hasMany(CommentArticle::class, 'article_id');
     }
 }

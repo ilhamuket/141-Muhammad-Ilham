@@ -2,7 +2,7 @@
     <div class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
         <div class="flex justify-between items-center">
             <div>
-                <a href="#" class="text-gray-800 text-xl font-bold md:text-2xl">TeknoTribuneJabar</a>
+                <a href="{{ route('home.index') }}" class="text-gray-800 text-xl font-bold md:text-2xl">TeknoTribuneJabar</a>
             </div>
             <div>
                 <button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden">

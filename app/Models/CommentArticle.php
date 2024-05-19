@@ -16,4 +16,15 @@ class CommentArticle extends Model
         'user_id',
         'content',
     ];
+
+    public function article()
+    {
+        return $this->belongsTo(TmDataArticle::class);
+    }
+
+    // Define the user relationship if needed
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
