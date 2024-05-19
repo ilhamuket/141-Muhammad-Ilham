@@ -4,10 +4,7 @@
 
     <div class="h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800">
         <div class="shrink-0 flex items-center justify-center h-16">
-            <a href="{{ route('dashboard') }}">
-                <img src="images/tekno-dark.png" alt="logo"
-                    class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-            </a>
+            
         </div>
         <ul class="space-y-2 font-medium">
             <li>
@@ -24,7 +21,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('article.index') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
@@ -64,7 +61,7 @@
 </aside>
 <nav class="fixed bg-white dark:bg-gray-800 w-full z-50">
     <div class="max-w-8xl mx-auto px-2 sm:px-3 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-20">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
