@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 
-Route::get('/', function () {
-    return view('home.index');
-})->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/articles/{article}', [HomeController::class, 'show'])->name('home.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');
@@ -21,8 +22,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
-    // Article Routes
-    Route::prefix('article')->group(function () {
+    Route::prefix('article')->middleware('admin')->group(function () {
         Route::get('/', [ArticleController::class, 'index'])->name('article.index');
         Route::get('/create', [ArticleController::class, 'create'])->name('article.create');
         Route::post('/', [ArticleController::class, 'store'])->name('article.store');
@@ -30,10 +30,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/{article}', [ArticleController::class, 'update'])->name('article.update');
         Route::delete('/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
     });
-    
 
     // Category Routes
-    Route::prefix('category')->group(function () {
+    Route::prefix('category')->middleware('admin')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('category.index');
         Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
         Route::post('/', [CategoryController::class, 'store'])->name('category.store');
@@ -41,6 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/{category}', [CategoryController::class, 'update'])->name('category.update');
         Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
     });
+
 });
 
 require __DIR__.'/auth.php';

@@ -31,6 +31,7 @@
                     <span class="flex-1 ms-3 whitespace-nowrap">Article</span>
                 </a>
             </li>
+            @if(auth()->user()->usertype === 'admin')
             <li>
                 <a href="{{ route('category.index') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -56,6 +57,7 @@
                 </a>
             </li>
             </li>
+            @endif
         </ul>
     </div>
 </aside>
@@ -72,7 +74,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
                         {{ __('Beranda') }}
                     </x-nav-link>
                 </div>                            

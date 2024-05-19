@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\TmDataArticle;
+use App\Models\TmRefCategory;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -15,10 +18,27 @@ class HomeController extends Controller
      * Display the user's profile form.
      */
 
-    public function content(Request $request): View
+     public function index(Request $request): View
     {
-        return view('home.content');
+        $articles = TmDataArticle::with('user', 'category')->latest()->paginate(5);
+        $authors = User::withCount('articles')->orderBy('articles_count', 'desc')->take(5)->get();
+        $categories = TmRefCategory::all();
+
+        return view('home.index', compact('articles', 'authors', 'categories'));
     }
+
+
+    public function show(TmDataArticle $article)
+    {
+        $article->load('category', 'user');
+        $authors = User::withCount('articles')->orderBy('articles_count', 'desc')->take(5)->get();
+        $categories = TmRefCategory::all();
+        $articles = TmDataArticle::with('user', 'category')->latest()->limit(3)->get();
+
+    
+        return view('home.show', compact('article','articles', 'authors', 'categories'));
+    }
+    
 
     /**
      * Update the user's profile information.
