@@ -18,7 +18,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = TmDataArticle::latest()->paginate(7);
+        $articles = TmDataArticle::latest()->paginate(5);
         return view('article.index', compact('articles'));
     }
 
@@ -111,7 +111,27 @@ class ArticleController extends Controller
 
     public function destroy(TmDataArticle $article)
     {
-        $article->delete();
-        return redirect()->route('article.index');
+        try {
+            
+            DB::beginTransaction();
+            
+            
+            $article->delete();
+            
+            
+            DB::commit();
+            
+            
+            return redirect()->route('article.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        } catch (\Exception $e) {
+            
+            DB::rollBack();
+            
+            
+            Log::error('Error deleting article: '.$e->getMessage());
+            
+            
+            return redirect()->route('article.index')->with(['error' => 'Data Gagal Dihapus!']);
+        }
     }
 }
