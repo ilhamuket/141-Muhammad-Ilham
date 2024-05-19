@@ -1,13 +1,14 @@
-## Aplikasi Web Berita Monolith Laravel
+## Aplikasi Web Blog Artiker TeknoTribuneJabar Monolith Laravel
 
 
 ![Logo](https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg)
 
 ### Pengenalan
-Assalamualaikum, nama saya Muhammad Ilham, peserta nomor 141 dalam kelas Fullstack Developer, grup 6. Saya senang memperkenalkan kepada Anda proyek Aplikasi Web Berita Monolith Laravel yang telah saya buat. Proyek ini adalah aplikasi web berita full-stack yang dibangun menggunakan framework Laravel.
+Assalamualaikum, nama saya Muhammad Ilham, peserta nomor 141 dalam kelas Fullstack Developer, grup 6. Saya senang memperkenalkan kepada Anda proyek Aplikasi Web Blog Monolith Laravel yang telah saya buat. Proyek ini adalah aplikasi web blog artikel bernama **TeknoTribuneJabar** full-stack yang dibangun menggunakan framework Laravel.
 
 ### Fitur-fitur
 - **Autentikasi Pengguna**: Pengguna dapat mendaftar, masuk, dan mengelola profil mereka.
+- **Beranda Blog**: Pengguna dapat melihat artikel, komentar, dan filter artikel.
 - **Manajemen Artikel**: Pengguna yang terautentikasi dapat membuat, mengedit, dan menghapus artikel.
 - **Manajemen Kategori**: Artikel dikelompokkan untuk pengorganisasian yang lebih baik.
 - **Panel Admin**: Administrator memiliki akses untuk mengelola pengguna, artikel, dan kategori.
